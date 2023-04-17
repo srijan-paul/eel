@@ -1,6 +1,25 @@
-.eelText {
+.eelBlock {
+  font-family: system-ui;
+}
+
+.eelText, .eelH1, .eelH2, .eelH3 {
   font-family: system-ui;
   outline: none;
+}
+
+.eelH1 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.eelH2 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.eelH3 {
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .editor-container {
