@@ -6,15 +6,22 @@
   "scripts": {
     "start": "parcel src/index.html",
     "build": "parcel build",
-    "check": "tsc --noEmit"
+    "check": "tsc --noEmit",
+    "format": "prettier -w src/**/*.ts",
+    "lint": "eslint src",
+    "ci": "pnpm install && prettier && eslint src"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["editor", "rich text"],
+  "author": "injuly",
   "license": "ISC",
   "devDependencies": {
     "@parcel/config-default": "^2.8.3",
     "@parcel/transformer-typescript-tsc": "^2.8.3",
+    "@typescript-eslint/eslint-plugin": "^5.58.0",
+    "@typescript-eslint/parser": "^5.58.0",
+    "eslint": "^8.38.0",
     "parcel": "^2.8.3",
+    "prettier": "^2.8.7",
     "typescript": "^5.0.4"
   }
 }
