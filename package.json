@@ -1,0 +1,20 @@
+{
+  "name": "eel",
+  "version": "0.0.0",
+  "description": "A rich-text editor library for web applications",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel src/index.html",
+    "build": "parcel build",
+    "check": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@parcel/config-default": "^2.8.3",
+    "@parcel/transformer-typescript-tsc": "^2.8.3",
+    "parcel": "^2.8.3",
+    "typescript": "^5.0.4"
+  }
+}

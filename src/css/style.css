@@ -1,0 +1,32 @@
+.eelText {
+  font-family: system-ui;
+  outline: none;
+}
+
+.editor-container {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
+  font-size: 14px;
+}
+
+.eelBlock {
+  padding: 0.8rem;
+  margin: 0rem 0rem;
+}
+
+.eelBlock--active {
+  background-color: #fafafa;
+}
+
+#editor-root {
+  text-align: left;
+  max-width: 50%;
+  min-width: 50%;
+  min-height: 300px;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 -3px 29px -5px rgba(34,39,47,.14)
+}
+
