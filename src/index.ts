@@ -122,7 +122,7 @@ export class Editor {
     this.mutationObserver.observe(this.mountElement, { childList: true, subtree: true, characterData: true })
   }
 
-  handleEnterKeyPress(event: KeyboardEvent) {
+  private handleEnterKeyPress(event: KeyboardEvent) {
     // If the 'enter' key is pressed when we're inside a block, we
     // should enter into a new block
     event.preventDefault()
@@ -133,7 +133,7 @@ export class Editor {
    * @param node A node in the DOM.
    * @returns The enclosing block inside which the node exists.
    */
-  findNearestBlockOfDOMNode(node: Node): Block | null {
+  public findNearestBlockOfDOMNode(node: Node): Block | null {
     let block = this.blockOfDomNode.get(node)
     if (block) return block
 
@@ -193,7 +193,7 @@ export class Editor {
    * Set `block` as the currently active block in the editor.
    * @param block 
    */
-  setActiveBlock(block: Block) {
+  public setActiveBlock(block: Block) {
     this.currentActiveBlock?.setActive(false)
     block.setActive(true)
 
@@ -224,7 +224,7 @@ export class Editor {
   }
 
   // Add a new block at the end. 
-  addBlockAtEnd(): Block {
+  private addBlockAtEnd(): Block {
     const newBlock = this.createActiveBlock()
     this.blocks.push(newBlock)
     this.mountElement.appendChild(newBlock.domNode)
@@ -232,24 +232,14 @@ export class Editor {
   }
 
   /**
-   * Inserts a new block at the given position.
-   * @param index The index in the block list after which the new block will be inserted.
-   */
-  addBlockAt(index: number) {
-    if (index < 0 || index >= this.blocks.length) {
-      throw new Error("Block index out of range")
-    }
-  }
-
-  /**
    * Insert a new block below the currently active block
    */
-  addBlockBelowCurrent() {
+  private addBlockBelowCurrent() {
     const previouslyActiveBlock = this.currentActiveBlock
     const indexOfActiveBlock = this.blocks.indexOf(previouslyActiveBlock)
     const newBlock = this.createActiveBlock()
 
-    // if the active block is the last block in the list,
+    // If the active block is the last block in the list,
     // then simply use `appendChild`.
     if (previouslyActiveBlock === this.blocks[this.blocks.length - 1]) {
       this.mountElement.appendChild(newBlock.domNode)
@@ -263,8 +253,6 @@ export class Editor {
       // insert the new block after the old active block index.
       this.blocks.splice(indexOfActiveBlock + 1, 0, newBlock)
     }
-
-    console.log('after:', this.blocks.map(bl => bl.child.domNode))
   }
 }
 
