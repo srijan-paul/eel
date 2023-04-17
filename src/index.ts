@@ -17,6 +17,12 @@ interface INode {
   type: NodeType
 }
 
+const enum Direction {
+  up,
+  down,
+  left,
+  right
+}
 
 /**
  * Create a DOM node with a specified classLista and attribute set.
@@ -123,7 +129,6 @@ export class Editor {
     this.addBlockBelowCurrent()
   }
 
-
   /**
    * @param node A node in the DOM.
    * @returns The enclosing block inside which the node exists.
@@ -153,6 +158,14 @@ export class Editor {
       }
     })
 
+    this.mountElement.addEventListener('keydown', (event) => {
+      switch (event.key) {
+        case 'ArrowUp': this.arrowUp(); break;
+        case 'ArrowDown': this.arrowDown(); break;
+        default: break;
+      }
+    })
+
     this.mountElement.addEventListener('click', (event) => {
       const { target } = event
       if (target instanceof HTMLElement) {
@@ -160,6 +173,20 @@ export class Editor {
         if (nearestBlock) this.setActiveBlock(nearestBlock)
       }
     })
+  }
+
+  arrowUp() {
+    const activeBlockIndex = this.blocks.indexOf(this.currentActiveBlock)
+    if (activeBlockIndex >= 1) {
+      this.setActiveBlock(this.blocks[activeBlockIndex - 1])
+    }
+  }
+
+  arrowDown() {
+    const activeBlockIndex = this.blocks.indexOf(this.currentActiveBlock)
+    if (activeBlockIndex < this.blocks.length - 1) {
+      this.setActiveBlock(this.blocks[activeBlockIndex + 1])
+    }
   }
 
   /**
