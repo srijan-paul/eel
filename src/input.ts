@@ -11,7 +11,7 @@ export const enum Modifier {
 
 export type KeyboardCallback = (event: KeyboardEvent) => void;
 
-// TODO: remove event listeners
+// TODO: functionality to remove event listeners
 
 /**
  * A helper class to handle keyboard shortcuts.
@@ -47,7 +47,7 @@ export default class Input {
   static addHotKeyTo(
     node: HTMLElement,
     key: string,
-    modifiers: number,
+    modifiers: Modifier,
     callback: KeyboardCallback
   ) {
     return node.addEventListener("keydown", (event) => {

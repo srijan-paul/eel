@@ -63,9 +63,9 @@ export class BlockList {
     block.setActive(true);
 
     // focus on the active block.
-    const text = block.child;
+    const child = block.child;
     setTimeout(() => {
-      text.domNode.focus();
+      child.domNode.focus();
     }, 20);
   }
 
@@ -112,7 +112,7 @@ export class BlockList {
   // Handle an arrow key up keyboard event
   arrowUp() {
     const activeBlockIndex = this.blocks.indexOf(this.activeBlock);
-    if (activeBlockIndex >= 1) {
+    if (activeBlockIndex > 0) {
       this.setActiveBlock(this.blocks[activeBlockIndex - 1]);
     }
   }
@@ -163,13 +163,13 @@ export class BlockList {
     }
   }
 
-  private replaceBlockChild(block: Block, child: INode) {
+  private replaceBlockChild(block: Block, newChild: INode) {
     const oldChild = block.child.domNode;
-    block.child = child;
-    block.domNode.replaceChild(child.domNode, oldChild);
+    block.child = newChild;
+    block.domNode.replaceChild(newChild.domNode, oldChild);
     // focus on new child
     setTimeout(() => {
-      child.domNode.focus();
+      newChild.domNode.focus();
     }, 20);
   }
 

@@ -4,6 +4,10 @@ export const enum NodeType {
   "Heading",
 }
 
+// Everything contained in the text editing area
+// is represented by a "node".
+// A Node can be either a block, or the child of a block.
+// Every has a DOM Node associated with it.
 export interface INode {
   type: NodeType;
   domNode: HTMLElement;
@@ -22,8 +26,9 @@ function makeNode(
 ): HTMLElement {
   const node = document.createElement(type);
   classes?.forEach((class_) => node.classList.add(class_));
-  if (!attrs) return node;
-  Object.entries(attrs).forEach(([key, val]) => node.setAttribute(key, val));
+  if (attrs) {
+    Object.entries(attrs).forEach(([key, val]) => node.setAttribute(key, val));
+  }
   return node;
 }
 
@@ -39,6 +44,13 @@ function div(
   return makeNode("div", classes, attrs) as HTMLDivElement;
 }
 
+// A block is the building block of our editor (heh).
+// The entire editing area is a linear list of blocks.
+// Every block contains exactly one child (may change later).
+// A block can contain:
+// - A text
+// - A heading
+// - (more to come)
 export class Block implements INode {
   type: NodeType.Block = NodeType.Block;
   domNode: HTMLDivElement = div(["eelBlock"]);
@@ -77,6 +89,8 @@ export class Text implements INode {
   }
 }
 
+// A helper function to dynamically create a class
+// for a heading node.
 function makeHeadingClass(divClassName: string) {
   return class implements INode {
     type = NodeType.Heading;

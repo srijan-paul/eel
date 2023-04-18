@@ -11,6 +11,10 @@ type EditorConfig = {
   root: string;
 };
 
+// A class that exposes the editor functionality.
+// An editor is a wrapper around a list of blocks.
+// A document is broken down into blocks, each of which
+// can be edited independently.
 export class Editor {
   // The DOM node that represent the editor.
   // It holds all the blocks inside it.
@@ -43,8 +47,8 @@ export class Editor {
     this.mountElement = el;
     this.inputHandler = new Input(this.mountElement);
 
-    this.addEventListeners();
     this.blockList = new BlockList(this.mountElement);
+    this.addEventListeners();
 
     this.mutationObserver.observe(this.mountElement, {
       childList: true,
@@ -77,11 +81,12 @@ export class Editor {
         case "ArrowDown":
           this.blockList.arrowDown();
           break;
-        case "Backspace":
+        case "Backspace": {
           const { target } = event
-          if (!target) break 
+          if (!target) break
           this.blockList.backspace(target as Node);
           break;
+        }
         default:
           break;
       }
@@ -119,4 +124,5 @@ export class Editor {
   }
 }
 
-new Editor({ root: "editor-root" });
+const _editor = new Editor({ root: "editor-root" });
+export default _editor;
