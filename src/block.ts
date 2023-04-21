@@ -74,6 +74,16 @@ export class Block implements INode {
       this.domNode.classList.remove(Block.Style.active);
     }
   }
+
+  /**
+   * @param newChild a new editor node to replace the current child with.
+   * @returns A reference to the old child node.
+   */
+  replaceChild(newChild: INode) {
+    const oldChild = this.child;
+    this.child = newChild;
+    oldChild.domNode.replaceWith(newChild.domNode);
+  }
 }
 
 // A "Text" contains plain text that may be bold, italic or underlined.
