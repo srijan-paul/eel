@@ -2,7 +2,10 @@
   font-family: system-ui;
 }
 
-.eelText, .eelH1, .eelH2, .eelH3 {
+.eelText,
+.eelH1,
+.eelH2,
+.eelH3 {
   font-family: system-ui;
   outline: none;
 }
