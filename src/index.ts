@@ -82,8 +82,8 @@ export class Editor {
           this.blockList.arrowDown();
           break;
         case "Backspace": {
-          const { target } = event
-          if (!target) break
+          const { target } = event;
+          if (!target) break;
           this.blockList.backspace(target as Node);
           break;
         }
