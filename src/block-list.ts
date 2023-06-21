@@ -131,42 +131,40 @@ export class BlockList {
     if (!block) return;
 
     const { textContent } = target;
-    if (textContent !== "") return
+    if (textContent !== "") return;
 
     // if block is empty and it's an heading, make it a text block
-  
+
     const { child } = block;
     if (child.type === NodeType.Heading) {
-      this.replaceBlockChild(block, new Text(block))
+      this.replaceBlockChild(block, new Text(block));
     } else if (child.type === NodeType.Text) {
-      this.deleteBlockIfNotLast(block) 
+      this.deleteBlockIfNotLast(block);
     }
   }
-  
+
   // If [block] is not the only block left, then delete it.
   private deleteBlockIfNotLast(block: Block) {
     if (this.blocks.length <= 1) return;
     const index = this.blocks.indexOf(block);
-    block.domNode.remove()
+    block.domNode.remove();
     if (index === 0) {
       // remove the first item, and set the next item as the currently active block
       this.blocks.shift();
-      this.setActiveBlock(this.blocks[0])
+      this.setActiveBlock(this.blocks[0]);
     } else if (index === this.blocks.length - 1) {
       // remove the last item, and set the previous item as the currently active block
-      this.blocks.pop()
-      this.setActiveBlock(this.blocks[index - 1])
+      this.blocks.pop();
+      this.setActiveBlock(this.blocks[index - 1]);
     } else {
       // remove the item at [index] and set the previous item as active
-      this.blocks.splice(index, 1)
-      this.setActiveBlock(this.blocks[index - 1])
+      this.blocks.splice(index, 1);
+      this.setActiveBlock(this.blocks[index - 1]);
     }
   }
 
   private replaceBlockChild(block: Block, newChild: INode) {
-    const oldChild = block.child.domNode;
-    block.child = newChild;
-    block.domNode.replaceChild(newChild.domNode, oldChild);
+    block.replaceChild(newChild);
     // focus on new child
     setTimeout(() => {
       newChild.domNode.focus();
@@ -195,4 +193,3 @@ export class BlockList {
     }
   }
 }
-
